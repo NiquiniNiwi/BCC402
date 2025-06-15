@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",  // Arquivo atualmente aberto
+            "console": "integratedTerminal",  // Permite colar credenciais no terminal
+            "python": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+            "cwd": "${workspaceFolder}",  // Diretório raiz do projeto
+            "justMyCode": true
+        }
+    ]
+}
