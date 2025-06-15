@@ -60,5 +60,5 @@ def process_lines(filename):
 
 for i in range(5):
     print(f'--- ENTRADA {i+1} ---')
-    process_lines(f'C:\\Users\\TEC\\Desktop\\BCC402\\Atividadade-1\\entrada{i+1}.txt')
+    process_lines(f'C:\\Users\\TEC\\Desktop\\BCC402\\Atividade-1\\entrada{i+1}.txt')
     print("------------------")
