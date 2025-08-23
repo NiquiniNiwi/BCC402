@@ -1,4 +1,4 @@
-import sys
+import random
 
 # Direções: mover o espaço (0) trocando com o vizinho
 DIRS = {
@@ -71,10 +71,11 @@ def solve(board):
     if backtrack(board, zr, zc, 0, 50, path, None):
         return "".join(path)
     else:
-        return "This puzzle is not solvable."
+        return "This puzzle is not solvable.(limite de profundidade)"
 
 def main():
-    with open('C:\\Users\\TEC\\Desktop\\BCC402\\Atividade-8\\entrada2.txt', "r") as f:
+    n = random.randint(1,7)
+    with open(f'C:\\Users\\TEC\\Desktop\\BCC402\\Atividade-8\\entrada{n}.txt', "r") as f:
         linhas = [linha.strip() for linha in f.readlines() if linha.strip()]
 
     qtd_tabuleiros = int(linhas[0])   # primeira linha
