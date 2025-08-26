@@ -1,4 +1,5 @@
 from collections import deque
+import random
 
 def bfs(inicial, alvo, proibidos):
     if inicial in proibidos:
@@ -50,6 +51,10 @@ def resolver(arquivo):
 
 
 # Exemplo de uso:
-resultados = resolver("C:\\Users\\TEC\\Desktop\\BCC402\\Atividade-9.1\\entrada1.txt")
-for r in resultados:
-    print(r)
+# Exemplo de uso
+if __name__ == "__main__":
+    n = random.randint(1,5)
+    print(f"Entrada {n}")
+    resultados = resolver(f"C:\\Users\\TEC\\Desktop\\BCC402\\Atividade-9.1\\entrada{n}.txt")
+    for r in resultados:
+        print(r)

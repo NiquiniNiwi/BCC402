@@ -1,23 +1,24 @@
 from collections import defaultdict, deque
+import random
 
 def eulerian_cycle(graph, start, edges_count):
     """Hierholzer’s algorithm: retorna um ciclo Euleriano"""
-    stack = [start]
-    path = []
-    used = defaultdict(int)
+    stack = [start] # pilha para simular DFS
+    path = [] # caminho final
+    used = defaultdict(int) # marca arestas já usadas
 
-    while stack:
-        u = stack[-1]
+    while stack: 
+        u = stack[-1] #Pega o vértice do topo da pilha (u).
         while graph[u] and used[(u, graph[u][-1])] > 0:
-            graph[u].pop()
+            graph[u].pop() #Remove arestas já usadas (se used[(u,v)] > 0).
         if graph[u]:
-            v = graph[u].pop()
-            used[(u, v)] += 1
-            used[(v, u)] += 1
-            stack.append(v)
+            v = graph[u].pop() # pega um vizinho
+            used[(u, v)] += 1 # marca a aresta (u,v) como usada
+            used[(v, u)] += 1 # como o grafo é não-direcionado, marca também (v,u)
+            stack.append(v) # continua explorando
         else:
-            path.append(stack.pop())
-    path.reverse()
+            path.append(stack.pop()) # se não tem mais vizinhos, fecha o caminho
+    path.reverse() # O caminho é construído de trás para frente → por isso faz reverse().
     return path
 
 def resolver(arquivo):
@@ -29,18 +30,18 @@ def resolver(arquivo):
     resultados = []
 
     for caso in range(1, T+1):
-        N = int(dados[idx]); idx += 1
-        graph = defaultdict(list)
-        grau = defaultdict(int)
-        beads = []
+        N = int(dados[idx]); idx += 1 #número de contas (arestas).
+        graph = defaultdict(list) #lista de adjacência.
+        grau = defaultdict(int) #grau de cada vértice.
+        beads = [] #lista dos pares lidos.
 
         for _ in range(N):
             a, b = map(int, dados[idx].split())
             idx += 1
-            beads.append((a, b))
-            graph[a].append(b)
-            graph[b].append(a)
-            grau[a] += 1
+            beads.append((a, b)) #Cada linha é um par (a, b) → aresta do grafo.
+            graph[a].append(b) #Como o grafo é não-direcionado, adiciona a → b e b → a.
+            graph[b].append(a) 
+            grau[a] += 1 #Atualiza os graus dos vértices.
             grau[b] += 1
 
         # Verificar se todos os vértices têm grau par
@@ -58,12 +59,12 @@ def resolver(arquivo):
                 visitados.add(u)
                 for v in graph[u]:
                     fila.append(v)
-            usados = {x for x in grau if grau[x] > 0}
-            if visitados != usados:
+            usados = {x for x in grau if grau[x] > 0} #Faz BFS a partir de um vértice com grau > 0.
+            if visitados != usados: #Se nem todos os vértices usados foram visitados, não é conexo → impossível.
                 possivel = False
 
         resultados.append(f"Case #{caso}")
-        if not possivel:
+        if not possivel:  #Se não for possível formar ciclo Euleriano → escreve "some beads may be lost".
             resultados.append("some beads may be lost")
         else:
             cycle = eulerian_cycle(defaultdict(list, {k:list(v) for k,v in graph.items()}),
@@ -78,4 +79,6 @@ def resolver(arquivo):
 
 # Exemplo de uso
 if __name__ == "__main__":
-    print(resolver("C:\\Users\\TEC\\Desktop\\BCC402\\Atividade-9.2\\entrada1.txt"))
+    n = random.randint(1,6)
+    print(f"Entrada {n}")
+    print(resolver(f"C:\\Users\\TEC\\Desktop\\BCC402\\Atividade-9.2\\entrada{n}.txt"))
