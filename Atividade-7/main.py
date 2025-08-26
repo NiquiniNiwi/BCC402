@@ -76,7 +76,7 @@ Isso faz com que eles pareçam primos quando, na verdade, não são.
 Exemplo: 561
 
 * 561 = 3 x 11 x 17, então é composto.
-* No entanto, para qualquer $a$ que seja coprimo com 561, vale:
+* No entanto, para qualquer a que seja coprimo com 561, vale:
 
 a^561 ≡ a (mod 561)
 
