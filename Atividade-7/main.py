@@ -21,7 +21,7 @@ def is_prime(n: int) -> bool:
 def is_carmichael(n: int) -> bool:  
     if is_prime(n): 
         return False
-    # Fermat congruence for all a coprime to n, 2 <= a <= n-1
+    # Fermat
     for a in range(2, n):
         if math.gcd(a, n) == 1:
             '''
