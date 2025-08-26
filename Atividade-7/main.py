@@ -1,5 +1,6 @@
 import sys
 import math
+import random
 
 def is_prime(n: int) -> bool:
     if n < 2: #1 é irrelevante
@@ -34,23 +35,27 @@ def is_carmichael(n: int) -> bool:
                 return False
     return True
 
-def main():
-    for line in sys.stdin:
-        line = line.strip()
-        if not line:
-            continue
-        n = int(line)
-        if n == 0:
-            break
-        if n < 3 or n >= 65000:#A entrada tem que ser maior que 2 e menor que 65000
+def resolver(arquivo):
+    with open(arquivo, "r") as f:
+        dados = f.read().strip().splitlines()
+
+    idx = 0
+    nao_zero = True
+    while nao_zero:
+        if int(dados[idx]) == 0:
+            nao_zero = False
+        elif int(dados[idx])  < 3 or int(dados[idx])  >= 65000:#A entrada tem que ser maior que 2 e menor que 65000
             print("Number out of range")
-        elif is_carmichael(n):
-            print(f"The number {n} is a Carmichael number.")
+        elif is_carmichael(int(dados[idx])):
+            print(f"The number {dados[idx]} is a Carmichael number.")
         else:
-            print(f"{n} is normal.")
+            print(f"{dados[idx]} is normal.")
+        idx+=1
 
 if __name__ == "__main__":
-    main()
+    n = random.randint(1,3)
+    print(f"Entrada {n}")
+    resolver(f"C:\\Users\\TEC\\Desktop\\BCC402\\Atividade-7\\entrada{n}.txt")
 
 
 '''
